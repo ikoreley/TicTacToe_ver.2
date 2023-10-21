@@ -7,6 +7,13 @@ import ru.practice.view.ViewGameMenu;
 import java.util.Scanner;
 
 public class MenuChoose {
+    private MenuChoose(){}
+    private static class MenuChooseHolder{
+        private final static MenuChoose instance = new MenuChoose();
+    }
+    public static MenuChoose getInstance(){
+        return MenuChooseHolder.instance;
+    }
 
     public Integer firstMenuChoose(Scanner scanner, ViewGameMenu viewGameMenu){
         try {
@@ -30,7 +37,7 @@ public class MenuChoose {
 
 
     //TODO: remake method!
-    public Game SecondMenuChoose(Scanner scanner){
+    public Game secondMenuChoose(Scanner scanner){
         try {
             switch (scanner.nextLine()){
                 case "0" -> {

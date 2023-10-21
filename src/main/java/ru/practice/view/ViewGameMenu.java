@@ -1,6 +1,14 @@
 package ru.practice.view;
 
 public class ViewGameMenu {
+    private ViewGameMenu(){}
+    private static class ViewGameMenuHolder{
+        private final static ViewGameMenu instance = new ViewGameMenu();
+    }
+    public static ViewGameMenu getInstance(){
+        return ViewGameMenuHolder.instance;
+    }
+
 
     public void printMainMenu(){
         String MAIN_MENU = """

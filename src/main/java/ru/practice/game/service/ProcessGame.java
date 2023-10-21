@@ -8,9 +8,16 @@ import ru.practice.view.ViewGameMenu;
 import java.util.Scanner;
 
 public class ProcessGame {
+    private ProcessGame(){}
+    private static class ProcessGameHolder{
+        private final static ProcessGame instance = new ProcessGame();
+    }
+    public static ProcessGame getInstance(){
+        return ProcessGameHolder.instance;
+    }
     Scanner scanner = new Scanner(System.in);
-    ViewGameMenu viewGameMenu = new ViewGameMenu();
-    MenuChoose menuChoose = new MenuChoose();
+    ViewGameMenu viewGameMenu = ViewGameMenu.getInstance();
+    MenuChoose menuChoose = MenuChoose.getInstance();
 
     public void start() {
 
@@ -18,7 +25,7 @@ public class ProcessGame {
 
         if (null == menuChoose.firstMenuChoose(scanner, viewGameMenu)) start();
 
-        Game game = menuChoose.SecondMenuChoose(scanner);
+        Game game = menuChoose.secondMenuChoose(scanner);
 
         FieldService fieldService = new FieldService();
         Field field = fieldService.createField();
