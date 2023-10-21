@@ -15,7 +15,9 @@ public class MenuChoose {
         return MenuChooseHolder.instance;
     }
 
-    public Integer firstMenuChoose(Scanner scanner, ViewGameMenu viewGameMenu){
+    Scanner scanner = new Scanner(System.in);
+
+    public Integer firstMenuChoose(ViewGameMenu viewGameMenu){
         try {
             switch (scanner.nextLine()){
                 case "Q","q" -> System.exit(0);
@@ -37,23 +39,17 @@ public class MenuChoose {
 
 
     //TODO: remake method!
-    public Game secondMenuChoose(Scanner scanner){
+    public Game secondMenuChoose(){
         try {
-            switch (scanner.nextLine()){
-                case "0" -> {
-                    return TypesOfPlayersTeams.ComputerSequential_vs_COMPUTER_RANDOM.createGame();
-                }
-                case "1" -> {
-                    return TypesOfPlayersTeams.COMPUTER_RANDOM_vs_COMPUTER_RANDOM.createGame();
-                }
-                case "2" -> {
-                    return TypesOfPlayersTeams.HUMAN_vs_COMPUTER_RANDOM.createGame();
-                }
-                case "3" -> {
-                    return TypesOfPlayersTeams.HUMAN_vs_HUMAN.createGame();
-                }
+            TypesOfPlayersTeams result = switch (scanner.nextLine()){
+                case "0" -> TypesOfPlayersTeams.ComputerSequential_vs_COMPUTER_RANDOM;
+                case "1" -> TypesOfPlayersTeams.COMPUTER_RANDOM_vs_COMPUTER_RANDOM;
+                case "2" -> TypesOfPlayersTeams.HUMAN_vs_COMPUTER_RANDOM;
+                case "3" -> TypesOfPlayersTeams.HUMAN_vs_HUMAN;
                 default -> throw new IllegalArgumentException();
-            }
+            };
+            return result.createGame();
+
         }catch (IllegalArgumentException e){
             System.err.println(e);
         }

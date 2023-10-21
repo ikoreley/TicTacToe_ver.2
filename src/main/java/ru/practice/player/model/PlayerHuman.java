@@ -29,17 +29,23 @@ public class PlayerHuman implements Player {
         int coutn=0;
         while (true) {
             String coord = scanner.nextLine();
-            int row = Character.getNumericValue(coord.charAt(0));
-            int col = Character.getNumericValue(coord.charAt(1));
+            try {
+                int row = Character.getNumericValue(coord.charAt(0));
+                int col = Character.getNumericValue(coord.charAt(1));
 
-            if (FieldService.enteredCoordinate(field, row, col)) {
-                return new Move(new Coordinate(row, col), cell);
+                if (FieldService.enteredCoordinate(field, row, col)) {
+                    return new Move(new Coordinate(row, col), cell);
+                }
+                ViewFieldAndGame.printErrorCoordinate(coord);
+            } catch (IndexOutOfBoundsException e){
+                ViewFieldAndGame.printErrorCoordinate(coord);
             }
 
-            ViewFieldAndGame.printErrorCoordinate(row, col);
-
             coutn++;
-            if (coutn == 3) return null;
+            if (coutn == 3){
+                ViewFieldAndGame.printManyOfWrongAttempts(cell);
+                return new Move(FieldService.createListEmptyCellField(field).get(0), cell);
+            }
         }
     }
 }

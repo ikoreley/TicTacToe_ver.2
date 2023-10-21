@@ -2,13 +2,14 @@ package ru.practice.field.service;
 
 import ru.practice.field.model.Cell;
 import ru.practice.field.model.Field;
+import ru.practice.game.service.SettingFileInput;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class FieldService {
-    private int sizeField = 3;
+    private int sizeField = SettingFileInput.getSettingsGame().get("sizeField");
 
     public Field createField(){
         return new Field(new Cell[getSizeField()][getSizeField()]);
@@ -22,10 +23,6 @@ public class FieldService {
 
     public int getSizeField() {
         return sizeField;
-    }
-
-    public void setSizeField(int sizeField) {
-        this.sizeField = sizeField;
     }
 
     public static List<Coordinate> createListEmptyCellField(Field field){

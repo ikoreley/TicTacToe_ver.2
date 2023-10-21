@@ -24,16 +24,11 @@ public class Game {
 
         while (true) {
             Player player = (turn==Cell.X_CELL)? player1: player2;
-            try {
-                ResultGame resultGame =  makeMoveField(player.doMove(field, turn), field);
-                if (resultGame != ResultGame.UNKNOWN){
-                    ViewFieldAndGame.printResultGame(turn, resultGame);
-                    ViewFieldAndGame.printField(field);
-                    break;
-                }
-            }catch (Exception e){
-                System.out.println("Слишком много попыток");
-                ViewFieldAndGame.printResultGame(turn, ResultGame.LOSE);
+
+            ResultGame resultGame =  makeMoveField(player.doMove(field, turn), field);
+            if (resultGame != ResultGame.UNKNOWN) {
+                ViewFieldAndGame.printResultGame(turn, resultGame);
+                ViewFieldAndGame.printField(field);
                 break;
             }
 
@@ -66,7 +61,7 @@ public class Game {
             if(field.getCell(u, u)==move.cell()){
                 diag1++;
             }
-            if(field.getCell(u, 2-u)==move.cell()){
+            if(field.getCell(u, (field.getField().length-1)-u)==move.cell()){
                 diag2++;
             }
 

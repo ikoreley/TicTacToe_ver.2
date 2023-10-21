@@ -8,6 +8,5 @@ public class Main {
         ProcessGame processGame = ProcessGame.getInstance();
         processGame.start();
 
-
     }
 }
