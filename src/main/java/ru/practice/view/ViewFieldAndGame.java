@@ -24,15 +24,16 @@ public class ViewFieldAndGame {
         System.out.println("Enter " + cell + "'s turn");
         System.out.println("RowCol: ");
     }
-    public static void printErrorCoordinate(String coord){
-        System.out.println("Entered '" + coord + "' uncorrected coordinate");
+    public static void printErrorCoordinate(int row, int col){
+        System.out.println("Entered row='" + row + "' and col='" + col + "' uncorrected coordinate");
     }
-    public static void printResultGame(Cell cell, ResultGame resultGame){
+    public static void printResultGame(Cell cell, ResultGame resultGame, Field field){
         switch (resultGame){
             case WIN -> System.out.println("Win " + cell);
             case DRAW -> System.out.println("DRAW");
             case LOSE -> System.out.println("LOSE " + cell);
         }
+        printField(field);
     }
     public static void printManyOfWrongAttempts(Cell cell){
         System.out.printf("3 incorrect attempts '%s', the move will be made automatically%n", cell.getSymbol());

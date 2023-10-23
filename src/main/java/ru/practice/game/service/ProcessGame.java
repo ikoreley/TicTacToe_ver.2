@@ -2,35 +2,35 @@ package ru.practice.game.service;
 
 import ru.practice.field.model.Field;
 import ru.practice.field.service.FieldService;
+import ru.practice.field.service.FieldServiceable;
 import ru.practice.view.ViewFieldAndGame;
 import ru.practice.view.ViewGameMenu;
+import ru.practice.view.ViewGameMenuRU;
 
 
 public class ProcessGame {
+
+    private static final ProcessGame instance = new ProcessGame();
+
     private ProcessGame(){}
-    private static class ProcessGameHolder{
-        private final static ProcessGame instance = new ProcessGame();
-    }
     public static ProcessGame getInstance(){
-        return ProcessGameHolder.instance;
+        return instance;
     }
 
-    ViewGameMenu viewGameMenu = ViewGameMenu.getInstance();
-    MenuChoose menuChoose = MenuChoose.getInstance();
+    private final MenuChooseable menuChoose = MenuChoose.getInstance();
+    private final ViewGameMenu viewGameMenu = ViewGameMenuRU.getInstance();
 
     public void start() {
 
         viewGameMenu.printMainMenu();
 
-        if (menuChoose.firstMenuChoose(viewGameMenu) == null) start();
+        if (menuChoose.firstMenuChoose().isEmpty()) start();
 
         Game game = menuChoose.secondMenuChoose();
 
-        FieldService fieldService = new FieldService();
+        FieldServiceable fieldService = new FieldService();
 
-        Field field = fieldService.createField();
-
-        fieldService.fillField(field);
+        Field field = fieldService.generateField();
 
         ViewFieldAndGame.printField(field);
 

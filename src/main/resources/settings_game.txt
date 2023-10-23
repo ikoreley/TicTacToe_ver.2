@@ -1,2 +1,2 @@
 sizeField:3
-sizeWin:3
+sizeForWin:3

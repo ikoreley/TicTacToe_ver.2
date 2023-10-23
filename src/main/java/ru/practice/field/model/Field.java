@@ -1,10 +1,21 @@
 package ru.practice.field.model;
 
+import ru.practice.field.service.Coordinate;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Field {
-    Cell[][] cells;
+    private Cell[][] cells;
+    private final Map<Coordinate, Cell> emptyCells;
 
     public Field(Cell[][] cells) {
         this.cells = cells;
+        emptyCells = new HashMap<>();
+    }
+
+    public Map<Coordinate, Cell> getEmptyCells() {
+        return emptyCells;
     }
 
     public Cell[][] getField() {
